@@ -32,4 +32,24 @@ public class PostValidatorTest {
         String actualStatus = validator.getPostStatus(postBody);
         Assert.assertEquals(actualStatus, expectedStatus);
     }
+// --------- AFTER METHODS & TEARDOWN ------
+    
+@AfterMethod
+    public void tearDownMethod() {
+        System.out.println(">>> AfterMethod: curățare după test");
+        // Aici poți curăța cookies, localStorage, test data etc.
+        if (driver != null) {
+            driver.manage().deleteAllCookies();
+        }
+    }
+
+    @AfterClass
+    public void tearDown() {
+        System.out.println(">>> AfterClass: teardown complet");
+
+        if (driver != null) {
+            driver.quit(); // închide browserul și WebDriver-ul
+            System.out.println(">>> WebDriver.quit() executat");
+        }
+    }
 }
